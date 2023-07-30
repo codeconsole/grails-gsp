@@ -80,8 +80,7 @@ class GroovyPagesGrailsPlugin extends Plugin {
         RenderTagLib,
         UrlMappingTagLib,
         ValidationTagLib,
-        PluginTagLib,
-        SitemeshTagLib
+        PluginTagLib
     ]
 
 
@@ -225,11 +224,6 @@ class GroovyPagesGrailsPlugin extends Plugin {
 
 
 
-        groovyPageLayoutFinder(GroovyPageLayoutFinder) {
-            gspReloadEnabled = enableReload
-            defaultDecoratorName = defaultDecoratorNameSetting ?: null
-            enableNonGspViews = sitemeshEnableNonGspViews
-        }
 
         // Setup the GroovyPagesUriService
         groovyPagesUriService(DefaultGroovyPagesUriService) { bean ->
@@ -258,6 +252,11 @@ class GroovyPagesGrailsPlugin extends Plugin {
         // containsKey check must be made to check existence of boolean false values in ConfigObject
 
         if(disableLayoutViewResolver) {
+            groovyPageLayoutFinder(GroovyPageLayoutFinder) {
+                gspReloadEnabled = enableReload
+                defaultDecoratorName = defaultDecoratorNameSetting ?: null
+                enableNonGspViews = sitemeshEnableNonGspViews
+            }
             grailsLayoutViewResolverPostProcessor(GrailsLayoutViewResolverPostProcessor)
         }
 
